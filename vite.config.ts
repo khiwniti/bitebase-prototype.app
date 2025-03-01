@@ -1,12 +1,10 @@
 import path from "path";
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import { tempo } from "tempo-devtools/dist/vite";
-
-const conditionalPlugins: [string, Record<string, any>][] = [];
+import react from "@vitejs/plugin-react";
 
 // @ts-ignore
 if (process.env.TEMPO === "true") {
+  // @ts-ignore
   conditionalPlugins.push(["tempo-devtools/swc", {}]);
 }
 
@@ -16,12 +14,7 @@ export default defineConfig({
   optimizeDeps: {
     entries: ["src/main.tsx", "src/tempobook/**/*"],
   },
-  plugins: [
-    react({
-      plugins: conditionalPlugins,
-    }),
-    tempo(),
-  ],
+  plugins: [react()],
   resolve: {
     preserveSymlinks: true,
     alias: {
@@ -29,7 +22,7 @@ export default defineConfig({
     },
   },
   server: {
-    // @ts-ignore
-    allowedHosts: true,
+    port: 3000,
+    open: true,
   }
 });

@@ -12,7 +12,7 @@ TempoDevtools.init();
 const basename = import.meta.env.BASE_URL;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode className="w-3/6 h-8">
+  <React.StrictMode>
     <BrowserRouter basename={basename}>
       <App />
     </BrowserRouter>
